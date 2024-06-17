@@ -19,7 +19,7 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-font pango:Iosevka 10
+font pango:Iosevka 13 
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -32,7 +32,7 @@ font pango:Iosevka 10
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec st
 
 # kill focused window
@@ -155,6 +155,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        # show ibus keyboard-input status in bar out-bar
+        # tray_output primary
 }
 
 bindsym Mod1+F1 exec "~/bin/hhkb-i3"
@@ -168,3 +170,10 @@ focus_follows_mouse no
 
 hide_edge_borders both
 
+exec --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440
+exec --no-startup-id xrandr --output HDMI-A-0 --mode 2560x1440
+exec --no-startup-id xrandr --output HDMI-A-0 --primary --same-as DisplayPort-0
+
+exec --no-startup-id ibus-daemon -drx
+
+exec --no-startup-id xset dmps 0 0 0
