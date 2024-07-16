@@ -1,5 +1,6 @@
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+;;             '("melpa" . "https://melpa.org/packages/") t)
+             '("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
 ;; (add-to-list 'package-archives
 ;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
