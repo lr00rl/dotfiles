@@ -9,7 +9,9 @@ set guifont=Iosevka\ 20
 set guioptions-=m
 set guioptions-=T
 set guicursor=n-v-c:ver25-Cursor/lCursor-blinkwait300-blinkon200-blinkoff150
-set noesckeys
+if !has('nvim')
+    set noesckeys
+endif
 set relativenumber
 set number
 set ignorecase
@@ -22,6 +24,7 @@ set nowrap
 set iminsert=0
 set imsearch=0
 colorscheme habamax
+let t_EI="\e[2 q"
 
 autocmd BufEnter * if &filetype == "go" | setlocal noexpandtab
 
@@ -32,6 +35,7 @@ set cursorline
 set cc=80,100
 
 " tnoremap <ESC> <C-\><C-n>
+set foldmethod=syntax
 
 set <M-1>=1
 set <M-2>=2
@@ -62,14 +66,14 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " 调整窗口大小
-set <M-h>=h
-set <M-j>=j
-set <M-k>=k
-set <M-l>=l
-noremap <M-h> :vertical resize -2<CR>
-noremap <M-j> :resize +2<CR>
-noremap <M-k> :resize -2<CR>
-noremap <M-l> :vertical resize +2<CR>
+" set <M-h>=H
+" set <M-j>=J
+" set <M-k>=K
+" set <M-l>=L
+" noremap <M-H> :vertical resize -2<CR>
+" noremap <M-J> :resize +2<CR>
+" noremap <M-K> :resize -2<CR>
+" noremap <M-L> :vertical resize +2<CR>
 
 noremap <C-j> <C-y>
 noremap <C-k> <C-e>
@@ -106,11 +110,21 @@ set <M-w>=w
 nnoremap <M-q> :tabp<CR>
 nnoremap <M-w> :tabn<CR>
 
-set <M-a>=a
-set <M-s>=s
-nnoremap <M-a> :bprevious<CR> ":bp
-nnoremap <M-s> :bnext<CR>     ":bn
+set <M-n>=n
+set <M-N>=N
+noremap <M-n> :bn<CR>
+noremap <M-N> :bp<CR>
 
+" if you got error refer to plug, you can try this to install vim-plug plugin
+" manager:
+"   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+" if you use vim, you can change the path to ~/.vim/autoload/plug.vim, like
+" this:
+"   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/vim/site/autoload/plug.vim -create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin('~/.vim/plugged')
+Plug 'github/copilot.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'matze/vim-move'
 call plug#end()
