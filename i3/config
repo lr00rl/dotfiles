@@ -171,10 +171,10 @@ focus_follows_mouse no
 
 hide_edge_borders both
 
-exec --no-startup-id xrandr --output DisplayPort-0 --off
-exec --no-startup-id xrandr --output HDMI-A-0 --off
-exec --no-startup-id xrandr --output DisplayPort-0 --auto --mode 2560x1440
-exec --no-startup-id xrandr --output HDMI-A-0 --auto --mode 2560x1440
+# exec --no-startup-id xrandr --output DisplayPort-0 --off
+# exec --no-startup-id xrandr --output HDMI-A-0 --off
+exec --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440
+exec --no-startup-id xrandr --output HDMI-A-0 --mode 2560x1440
 exec --no-startup-id xrandr --output DisplayPort-0 --primary --same-as HDMI-A-0 
 
 exec --no-startup-id ibus-daemon -drx
