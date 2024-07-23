@@ -1,11 +1,12 @@
 syntax on
 filetype plugin indent on
+set encoding=utf-8
 set tabstop=4
 set autoindent
 set smartindent
 set shiftwidth=4
 set expandtab
-set guifont=Iosevka\ 20 
+set guifont=Hack\ Nerd\ Font\ Mono:h18 
 set guioptions-=m
 set guioptions-=T
 set guicursor=n-v-c:ver25-Cursor/lCursor-blinkwait300-blinkon200-blinkoff150
@@ -33,6 +34,14 @@ set hlsearch
 set ic
 set cursorline
 set cc=80,100
+
+let mapleader = "\\"
+let g:mapleader = "\\"
+nnoremap <leader>y "+yy
+" 在可视模式下映射 <leader>c 为复制到系统剪贴板
+vnoremap <leader>c "+y
+" 在普通模式下映射 <leader>v 为从系统剪贴板粘贴
+nnoremap <leader>v "+p
 
 " tnoremap <ESC> <C-\><C-n>
 set foldmethod=syntax
@@ -66,14 +75,14 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " 调整窗口大小
-" set <M-h>=H
-" set <M-j>=J
-" set <M-k>=K
-" set <M-l>=L
-" noremap <M-H> :vertical resize -2<CR>
-" noremap <M-J> :resize +2<CR>
-" noremap <M-K> :resize -2<CR>
-" noremap <M-L> :vertical resize +2<CR>
+set <M-h>=H
+set <M-j>=J
+set <M-k>=K
+set <M-l>=L
+noremap <M-H> :vertical resize -2<CR>
+noremap <M-J> :resize +2<CR>
+noremap <M-K> :resize -2<CR>
+noremap <M-L> :vertical resize +2<CR>
 
 noremap <C-j> <C-y>
 noremap <C-k> <C-e>
@@ -115,16 +124,81 @@ set <M-N>=N
 noremap <M-n> :bn<CR>
 noremap <M-N> :bp<CR>
 
-" if you got error refer to plug, you can try this to install vim-plug plugin
-" manager:
+" if you got error refer to plug, you can try this to install vim-plug plugin manager:
 "   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-" if you use vim, you can change the path to ~/.vim/autoload/plug.vim, like
-" this:
+" if you use vim, you can change the path to ~/.vim/autoload/plug.vim, like this:
 "   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/vim/site/autoload/plug.vim -create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin('~/.vim/plugged')
 Plug 'github/copilot.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
+Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdtree'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'matze/vim-move'
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mg979/vim-visual-multi'
 call plug#end()
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+let g:airline#extensions#whitespace#enabled = 0
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.colnr = ' ㏇:'
+" let g:airline_symbols.colnr = ' ℅:'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '☰'
+" let g:airline_symbols.linenr = ' ␊:'
+" let g:airline_symbols.linenr = ' ␤:'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.maxlinenr = ''
+" let g:airline_symbols.maxlinenr = '㏑'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.spell = 'Ꞩ'
+" let g:airline_symbols.notexists = 'Ɇ'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.colnr = ' ℅:'
+let g:airline_symbols.colnr = 'Col:'
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.linenr = ' L:'
+" let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.maxlinenr = ' '
+" let g:airline_symbols.dirty='⚡'
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+" asyncRun settings:
+nnoremap <leader>r :AsyncRun 
+let g:asyncrun_open = 10

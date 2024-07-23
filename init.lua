@@ -11,6 +11,10 @@ vim.api.nvim_create_autocmd({"VimEnter", "VimLeave"}, {
   end
 })
 
+-- vim.g.mapleader = '\\'
+-- -- 在可视模式下映射 <leader>c 为复制到系统剪贴板
+-- vim.keymap.set('v', '<leader>c', '"+y')
+-- vim.keymap.set('n', '<leader>v', '"+p')
 
 -- local group = vim.api.nvim_create_augroup("CursorShape", { clear = true })
 -- 
